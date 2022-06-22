@@ -2,7 +2,7 @@ from dataclasses import dataclass
 import requests
 import jsonrpcclient
 from abc import ABC, abstractmethod
-from .types import ChainGetStateRootHashResponse, StateGetAccountInfoResponse, InfoGetDeployResponse
+from .types_old import ChainGetStateRootHashResponse, StateGetAccountInfoResponse, InfoGetDeployResponse
 from .constants import CHAIN_GET_STATE_ROOT_HASH, STATE_GET_ACCOUNT_INFO, INFO_GET_DEPLOY
 
 class Client(ABC):
@@ -62,15 +62,15 @@ class JRPCClient(Client):
         Get the state root hash of the chain.
         """
         res = self.send(CHAIN_GET_STATE_ROOT_HASH, {})
-        return ChainGetStateRootHashResponse.from_api(res)
+        return ChainGetStateRootHashResponse.from_dict(res)
     
     def state_get_account_info(self, public_key: str) -> StateGetAccountInfoResponse:
         """
         Get the account info of the public key.
         """
         res = self.send(STATE_GET_ACCOUNT_INFO, {"public_key": public_key})
-        return StateGetAccountInfoResponse.from_api(res)
+        return StateGetAccountInfoResponse.from_dict(res)
     
     def info_get_deploy(self, deploy_hash: str) -> InfoGetDeployResponse:
         res = self.send(INFO_GET_DEPLOY, {"deploy_hash": deploy_hash})
-        return InfoGetDeployResponse.from_api(res)
+        return InfoGetDeployResponse.from_dict(res)

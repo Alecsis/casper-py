@@ -88,16 +88,17 @@ def parse_deploy_info() -> InfoGetDeployResponse:
                             ]
                         },
                         "transfers": [
-                        "transfer-5959595959595959595959595959595959595959595959595959595959595959",
-                        "transfer-8282828282828282828282828282828282828282828282828282828282828282"
+                            "transfer-5959595959595959595959595959595959595959595959595959595959595959",
+                            "transfer-8282828282828282828282828282828282828282828282828282828282828282"
                         ]
                     }
                 }
             }
         ]
     }
-    return InfoGetDeployResponse.from_api(mock_deploy_info)
+    return InfoGetDeployResponse.from_dict(mock_deploy_info)
 
 if __name__ == "__main__":
-    parse_deploy_info()
+    deploy_info = parse_deploy_info()
+    print(deploy_info)
     print("Tests passed successfully.")
